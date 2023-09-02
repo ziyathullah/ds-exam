@@ -48,7 +48,7 @@ jobs:
           cat ${{steps.render-web-container.outputs.task-definition}}
 
       - name: Build and Deploy
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1.1
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{steps.render-web-container.outputs.task-definition}}
           ecs-cluster: ds-exam
