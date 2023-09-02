@@ -6,12 +6,12 @@ on:
       - "main"
 
 env:
-  AWS_REGION: us-east-1                  # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: demo-deploy          # set this to your Amazon ECR repository name
-  ECS_SERVICE: demo-deploy                # set this to your Amazon ECS service name
-  ECS_CLUSTER: demo-deploy                 # set this to your Amazon ECS cluster name
+  AWS_REGION: eu-west-3                  # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: ds-exam         # set this to your Amazon ECR repository name
+  ECS_SERVICE: ds-exam-service                # set this to your Amazon ECS service name
+  ECS_CLUSTER: ds-exam                # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: .github/workflows/esc-task-definition.json      # set this to the path to your Amazon ECS task definition                                           # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: demo-deploy           # set this to the name of the container in the
+  CONTAINER_NAME: task-container           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 permissions:
@@ -30,8 +30,8 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ########################### # Update the ARN of the IAM role
-        role-session-name: Github
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
